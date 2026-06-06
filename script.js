@@ -175,3 +175,58 @@ box.innerHTML=
 }
 
 loadHomepageTraining();
+
+function updateClock() {
+
+const now = new Date();
+
+const time =
+now.toLocaleTimeString(
+'en-US',
+{
+hour:'numeric',
+minute:'2-digit',
+second:'2-digit'
+}
+);
+
+const date =
+now.toLocaleDateString(
+'en-US',
+{
+weekday:'short',
+month:'short',
+day:'numeric'
+}
+);
+
+const timeBox =
+document.getElementById(
+"currentTime"
+);
+
+const dateBox =
+document.getElementById(
+"currentDate"
+);
+
+if(timeBox){
+
+timeBox.innerText = time;
+
+}
+
+if(dateBox){
+
+dateBox.innerText = date;
+
+}
+
+}
+
+updateClock();
+
+setInterval(
+updateClock,
+1000
+);

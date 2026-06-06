@@ -31,11 +31,11 @@ flex-direction:column;
 
 display:flex;
 
-gap:18px;
-
 align-items:center;
 
-margin-bottom:35px;
+gap:16px;
+
+margin-bottom:30px;
 
 }
 
@@ -43,14 +43,59 @@ margin-bottom:35px;
 
 width:85px;
 
-height:auto;
+height:85px;
 
 object-fit:contain;
 
-filter:
-drop-shadow(0 0 10px rgba(0,0,0,.4));
-
 flex-shrink:0;
+
+}
+
+.brand-text{
+
+display:flex;
+
+flex-direction:column;
+
+justify-content:center;
+
+min-width:0;
+
+}
+
+.brand-text h1{
+
+font-size:28px;
+
+line-height:1.05;
+
+margin:0;
+
+font-weight:700;
+
+}
+
+.brand-text p{
+
+font-size:14px;
+
+margin-top:6px;
+
+opacity:.8;
+
+margin-bottom:4px;
+
+}
+
+.brand-text span{
+
+font-size:11px;
+
+color:#2d8fff;
+
+font-style:italic;
+
+text-transform:uppercase;
 
 }
 
@@ -136,8 +181,43 @@ padding:0 5px 20px;
 }
 
 .top-nav{
+
 display:flex;
-gap:10px;
+
+align-items:center;
+
+gap:25px;
+
+}
+
+.portal-clock{
+
+margin-left:auto;
+
+display:flex;
+
+flex-direction:column;
+
+align-items:flex-end;
+
+padding-right:10px;
+
+}
+
+#currentTime{
+
+font-size:22px;
+
+font-weight:700;
+
+}
+
+#currentDate{
+
+font-size:12px;
+
+opacity:.7;
+
 }
 
 .top-nav a{
@@ -330,8 +410,9 @@ font-size:26px;
 }
 
 .quick-links{
-display:flex;
-flex-direction:column;
+
+border-left:3px solid #2d8fff;
+
 }
 
 .quick-links a,
@@ -437,10 +518,12 @@ color:white;
 cursor:pointer;
 }
 
+
 footer{
-padding:40px;
+padding-top:40px;
 text-align:center;
-opacity:.5;
+padding-bottom:30px;
+
 }
 
 /* RESPONSIVE */
@@ -1087,4 +1170,250 @@ transition:.2s;
 
 transform:scale(1.02);
 
+}
+
+.penal-header{
+display:flex;
+justify-content:space-between;
+align-items:center;
+gap:20px;
+margin-bottom:25px;
+}
+
+.penal-header p{
+opacity:.65;
+margin-top:6px;
+}
+
+.penal-search{
+width:100%;
+padding:16px;
+border:none;
+border-radius:12px;
+background:#10233d;
+color:white;
+font-size:17px;
+margin-bottom:25px;
+}
+
+.penal-list{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+gap:18px;
+}
+
+.penal-card{
+background:#10233d;
+border-radius:16px;
+padding:22px;
+border-left:4px solid #2d8fff;
+}
+
+.penal-top{
+display:flex;
+justify-content:space-between;
+gap:15px;
+align-items:center;
+margin-bottom:12px;
+}
+
+.penal-top h3{
+color:#2d8fff;
+}
+
+.penal-top span{
+background:#081220;
+padding:8px 12px;
+border-radius:999px;
+font-size:14px;
+white-space:nowrap;
+}
+
+.penal-card p{
+margin-bottom:8px;
+opacity:.85;
+}
+
+.miranda-box{
+background:#10233d;
+padding:30px;
+border-radius:16px;
+font-size:20px;
+line-height:1.8;
+border-left:4px solid #2d8fff;
+}
+
+.mission-section{
+
+margin-top:25px;
+
+background:#10233d;
+
+border-radius:18px;
+
+padding:35px;
+
+display:grid;
+
+grid-template-columns:2fr 1fr;
+
+gap:35px;
+
+align-items:center;
+
+}
+
+.mission-left h2{
+
+font-size:32px;
+
+margin-bottom:18px;
+
+}
+
+.mission-left p{
+
+line-height:1.9;
+
+opacity:.85;
+
+font-size:17px;
+
+}
+
+.mission-right{
+
+display:flex;
+
+flex-direction:column;
+
+gap:15px;
+
+}
+
+.mission-highlight{
+
+background:#081220;
+
+padding:18px;
+
+border-radius:12px;
+
+border-left:4px solid #2d8fff;
+
+}
+
+.mission-highlight strong{
+
+display:block;
+
+font-size:18px;
+
+margin-bottom:6px;
+
+color:#2d8fff;
+
+}
+
+.mission-highlight span{
+
+opacity:.75;
+
+}
+
+@media(max-width:900px){
+
+.mission-section{
+
+grid-template-columns:1fr;
+
+}
+
+}
+
+.footer-quote{
+
+margin:18px 0;
+
+font-size:18px;
+
+font-weight:600;
+
+opacity:.9;
+
+}
+
+.footer-quote span{
+
+display:block;
+
+margin-top:8px;
+
+font-size:14px;
+
+opacity:.7;
+
+font-weight:400;
+
+}
+
+.status-card{
+
+text-align:center;
+
+}
+
+.status-card h3{
+text-align:center;
+margin-bottom:18px;
+}
+
+.status-line{
+display:flex;
+align-items:center;
+gap:10px;
+margin:12px 0;
+font-size:14px;
+}
+
+.status-dot{
+width:10px;
+height:10px;
+border-radius:50%;
+background:#2dff89;
+box-shadow:0 0 8px #2dff89;
+}
+
+.status-dot.blue{
+background:#2d8fff;
+box-shadow:0 0 8px #2d8fff;
+}
+
+.status-dot.yellow{
+background:#ffd45a;
+box-shadow:0 0 8px #ffd45a;
+}
+
+.procedure-row{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:20px;
+margin-top:20px;
+}
+
+.procedure-card{
+background:#0c1624;
+border-radius:16px;
+padding:22px;
+border-left:4px solid #2d8fff;
+}
+
+.procedure-card h3{
+color:#2d8fff;
+margin-bottom:10px;
+}
+
+.procedure-card p{
+opacity:.8;
+line-height:1.6;
 }
