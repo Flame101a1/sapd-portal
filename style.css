@@ -1417,3 +1417,85 @@ margin-bottom:10px;
 opacity:.8;
 line-height:1.6;
 }
+
+.warrant-grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+gap:20px;
+}
+
+.warrant-card{
+background:#10233d;
+padding:25px;
+border-radius:16px;
+border-left:4px solid #2d8fff;
+text-decoration:none;
+color:white;
+transition:.2s;
+}
+
+.warrant-card:hover{
+transform:translateY(-4px);
+background:#14365f;
+}
+
+.warrant-card h2{
+color:#2d8fff;
+margin-bottom:12px;
+}
+
+.warrant-card p{
+opacity:.8;
+line-height:1.6;
+margin-bottom:20px;
+}
+
+.warrant-card span{
+font-weight:700;
+}
+
+.warrant-process{
+
+margin-top:45px;
+
+}
+
+.process-grid{
+
+display:grid;
+
+grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+
+gap:20px;
+
+margin-top:20px;
+
+}
+
+.process-card{
+
+background:#10233d;
+
+padding:25px;
+
+border-radius:16px;
+
+border-left:4px solid #2d8fff;
+
+}
+
+.process-card h3{
+
+color:#2d8fff;
+
+margin-bottom:15px;
+
+}
+
+.process-card p{
+
+line-height:1.7;
+
+opacity:.85;
+
+}
