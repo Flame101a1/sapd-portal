@@ -1,5 +1,7 @@
 const hero = document.querySelector(".hero");
 const dots = document.querySelectorAll(".dots span");
+const rightButton = document.querySelector(".right");
+const leftButton = document.querySelector(".left");
 
 const heroImages = [
   "images/hero1.png",
@@ -12,6 +14,10 @@ const heroImages = [
 let currentSlide = 0;
 
 function showSlide(index){
+  if(!hero || !dots.length){
+    return;
+  }
+
   currentSlide = index;
 
   hero.style.backgroundImage = `
@@ -23,63 +29,76 @@ function showSlide(index){
   dots[currentSlide].classList.add("active");
 }
 
-document.querySelector(".right").addEventListener("click", () => {
-  showSlide((currentSlide + 1) % heroImages.length);
-});
-
-document.querySelector(".left").addEventListener("click", () => {
-  showSlide((currentSlide - 1 + heroImages.length) % heroImages.length);
-});
-
-dots.forEach((dot, index) => {
-  dot.addEventListener("click", () => {
-    showSlide(index);
+if(hero){
+  rightButton?.addEventListener("click", () => {
+    showSlide((currentSlide + 1) % heroImages.length);
   });
-});
 
-setInterval(() => {
-  showSlide((currentSlide + 1) % heroImages.length);
-}, 30000);
+  leftButton?.addEventListener("click", () => {
+    showSlide((currentSlide - 1 + heroImages.length) % heroImages.length);
+  });
 
-showSlide(0);
+  dots.forEach((dot, index) => {
+    dot.addEventListener("click", () => {
+      showSlide(index);
+    });
+  });
 
-/* ANNOUNCEMENTS */
+  setInterval(() => {
+    showSlide((currentSlide + 1) % heroImages.length);
+  }, 30000);
+
+  showSlide(0);
+}
 
 const announcementCSV = "https://docs.google.com/spreadsheets/d/e/2PACX-1vQ7yw1l-mMGSCq9igqwQdMFRYJr48E-eNgsFL9IEDJFhs30RdN3rWjz4XvAXj9bGxInN8XUwAwY2d3z/pub?output=csv";
+const trainingCSV = "https://docs.google.com/spreadsheets/d/e/2PACX-1vSZbrCNLtpHwvm38Zwx52sj1tgDcbqIndgBpkZ36DEzWaY1j_qmxYyRxmjBW_l28EwdN3aui-Cy1wbF/pub?output=csv";
 
-async function loadAnnouncements() {
+function parseCSVRows(text){
+  return text.trim().split("\n").slice(1).filter(Boolean);
+}
+
+function escapeHTML(value){
+  return String(value || "").replace(/[&<>"']/g, character => ({
+    "&":"&amp;",
+    "<":"&lt;",
+    ">":"&gt;",
+    '"':"&quot;",
+    "'":"&#39;"
+  }[character]));
+}
+
+async function loadAnnouncements(){
   const box = document.getElementById("announcements-list");
 
-  try {
-    const response = await fetch(announcementCSV + "&cacheBust=" + Date.now());
+  if(!box){
+    return;
+  }
 
-    if (!response.ok) {
+  try{
+    const response = await fetch(`${announcementCSV}&cacheBust=${Date.now()}`);
+
+    if(!response.ok){
       throw new Error("Failed to load CSV");
     }
 
-    const text = await response.text();
+    const rows = parseCSVRows(await response.text());
 
-    const rows = text.trim().split("\n").slice(1);
-
-    box.innerHTML = "";
-
-    rows.forEach(row => {
+    box.innerHTML = rows.map(row => {
       const columns = row.split(",");
+      const title = escapeHTML(columns[0] || "Untitled Announcement");
+      const message = escapeHTML(columns[1] || "");
+      const date = escapeHTML(columns[2] || "");
 
-      const title = columns[0] || "Untitled Announcement";
-      const message = columns[1] || "";
-      const date = columns[2] || "";
-
-      box.innerHTML += `
+      return `
         <div class="announcement">
           <h4>${title}</h4>
           <p>${message}</p>
           <span>${date}</span>
         </div>
       `;
-    });
-
-  } catch (error) {
+    }).join("");
+  }catch{
     box.innerHTML = `
       <p>Announcements could not be loaded.</p>
       <p style="opacity:.6;font-size:14px;">Try viewing this through GitHub Pages or Live Server.</p>
@@ -87,146 +106,64 @@ async function loadAnnouncements() {
   }
 }
 
-loadAnnouncements();
-
-const trainingCSV =
-"https://docs.google.com/spreadsheets/d/e/2PACX-1vSZbrCNLtpHwvm38Zwx52sj1tgDcbqIndgBpkZ36DEzWaY1j_qmxYyRxmjBW_l28EwdN3aui-Cy1wbF/pub?output=csv";
-
 async function loadHomepageTraining(){
+  const box = document.getElementById("homepage-training");
 
-const box =
-document.getElementById(
-"homepage-training"
-);
+  if(!box){
+    return;
+  }
 
-if(!box) return;
+  try{
+    const response = await fetch(`${trainingCSV}&cacheBust=${Date.now()}`);
+    const rows = parseCSVRows(await response.text()).slice(0,3);
 
-try{
+    box.innerHTML = rows.map(row => {
+      const columns = row.split(",");
+      const date = escapeHTML(columns[0]);
+      const title = escapeHTML(columns[1]);
+      const lineOne = escapeHTML(columns[2]);
+      const lineTwo = escapeHTML(columns[3]);
 
-const response =
-await fetch(
-trainingCSV +
-"&cacheBust=" +
-Date.now()
-);
-
-const text =
-await response.text();
-
-const rows =
-text.trim()
-.split("\n")
-.slice(1)
-.slice(0,3);
-
-box.innerHTML="";
-
-rows.forEach(row=>{
-
-const columns=row.split(",");
-
-box.innerHTML += `
-
-<div class="training-item">
-
-<div class="date">
-
-<strong>
-
-${columns[0]}
-
-</strong>
-
-</div>
-
-<div>
-
-<h4>
-
-${columns[1]}
-
-</h4>
-
-<p>
-
-${columns[2]}
-
-<br>
-
-${columns[3]}
-
-</p>
-
-</div>
-
-</div>
-
-`;
-
-});
-
-}catch{
-
-box.innerHTML=
-"<p>Training unavailable.</p>";
-
+      return `
+        <div class="training-item">
+          <div class="date">
+            <strong>${date}</strong>
+          </div>
+          <div>
+            <h4>${title}</h4>
+            <p>${lineOne}<br>${lineTwo}</p>
+          </div>
+        </div>
+      `;
+    }).join("");
+  }catch{
+    box.innerHTML = "<p>Training unavailable.</p>";
+  }
 }
 
+function updateClock(){
+  const now = new Date();
+  const timeBox = document.getElementById("currentTime");
+  const dateBox = document.getElementById("currentDate");
+
+  if(timeBox){
+    timeBox.innerText = now.toLocaleTimeString("en-US", {
+      hour:"numeric",
+      minute:"2-digit",
+      second:"2-digit"
+    });
+  }
+
+  if(dateBox){
+    dateBox.innerText = now.toLocaleDateString("en-US", {
+      weekday:"short",
+      month:"short",
+      day:"numeric"
+    });
+  }
 }
 
+loadAnnouncements();
 loadHomepageTraining();
-
-function updateClock() {
-
-const now = new Date();
-
-const time =
-now.toLocaleTimeString(
-'en-US',
-{
-hour:'numeric',
-minute:'2-digit',
-second:'2-digit'
-}
-);
-
-const date =
-now.toLocaleDateString(
-'en-US',
-{
-weekday:'short',
-month:'short',
-day:'numeric'
-}
-);
-
-const timeBox =
-document.getElementById(
-"currentTime"
-);
-
-const dateBox =
-document.getElementById(
-"currentDate"
-);
-
-if(timeBox){
-
-timeBox.innerText = time;
-
-}
-
-if(dateBox){
-
-dateBox.innerText = date;
-
-}
-
-}
-
 updateClock();
-
-setInterval(
-updateClock,
-1000
-);
+setInterval(updateClock, 1000);
