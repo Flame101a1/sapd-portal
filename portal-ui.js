@@ -17,7 +17,8 @@
     ["FTO Resources", "https://flame101a1.github.io/sapd-training-tracker/", "fto-link external-link"],
     ["Warrants", "warrantform.html"],
     ["Complaints", "complaints.html"],
-    ["Suggestions", "suggestions.html"]
+    ["Suggestions", "suggestions.html"],
+    ["Site Issues", "siteissues.html"]
   ];
 
   const currentPage = window.location.pathname.split("/").pop() || "index.html";

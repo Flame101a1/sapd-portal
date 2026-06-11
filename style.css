@@ -680,6 +680,46 @@ button{
   line-height:1.6;
 }
 
+.issue-bubble{
+  position:fixed;
+  right:22px;
+  bottom:22px;
+  z-index:1000;
+  min-height:48px;
+  padding:8px 14px 8px 8px;
+  display:inline-flex;
+  align-items:center;
+  gap:9px;
+  border:1px solid rgba(242,200,95,.55);
+  border-radius:999px;
+  background:linear-gradient(180deg, rgba(16,36,59,.96), rgba(8,18,32,.96));
+  color:#fff4cf;
+  text-decoration:none;
+  font-size:13px;
+  font-weight:850;
+  box-shadow:0 14px 34px rgba(0,0,0,.32);
+  transition:transform .2s ease, border-color .2s ease, background .2s ease;
+}
+
+.issue-bubble span{
+  width:32px;
+  height:32px;
+  display:grid;
+  place-items:center;
+  flex-shrink:0;
+  border-radius:50%;
+  background:rgba(242,200,95,.18);
+  color:var(--gold);
+  font-size:18px;
+  line-height:1;
+}
+
+.issue-bubble:hover{
+  transform:translateY(-2px);
+  border-color:rgba(242,200,95,.9);
+  background:linear-gradient(180deg, rgba(19,47,79,.98), rgba(10,23,40,.98));
+}
+
 /* Inner pages */
 
 .page-layout{
@@ -838,10 +878,10 @@ button{
   font-size:clamp(28px, 4vw, 42px);
 }
 
-.coming-soon-card p{
-  max-width:700px;
-  margin:auto;
-  color:var(--muted-2);
+  .coming-soon-card p{
+    max-width:700px;
+    margin:auto;
+    color:var(--muted-2);
   line-height:1.75;
 }
 
@@ -1016,6 +1056,44 @@ button{
 .penal-search:focus{
   border-color:rgba(102,179,255,.65);
   box-shadow:0 0 0 3px rgba(47,140,255,.16);
+}
+
+.radio-group{
+  padding:16px;
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+  background:rgba(6,16,29,.38);
+}
+
+.radio-group legend{
+  margin-bottom:4px;
+  color:var(--muted-2);
+  font-weight:750;
+}
+
+.radio-group label{
+  width:max-content;
+  max-width:100%;
+  flex-direction:row;
+  align-items:center;
+  gap:10px;
+  padding:5px 0;
+  font-weight:650;
+}
+
+.radio-group input{
+  width:16px;
+  height:16px;
+  padding:0;
+  flex-shrink:0;
+  accent-color:var(--blue);
+}
+
+.field-note{
+  margin-top:-5px;
+  color:var(--muted);
+  font-size:13px;
+  line-height:1.5;
 }
 
 .sapd-form button,
@@ -1475,5 +1553,21 @@ footer,
 
   .code-card span{
     text-align:left;
+  }
+
+  .issue-bubble{
+    right:14px;
+    bottom:14px;
+    min-height:44px;
+    padding:7px;
+  }
+
+  .issue-bubble strong{
+    position:absolute;
+    width:1px;
+    height:1px;
+    overflow:hidden;
+    clip:rect(0 0 0 0);
+    white-space:nowrap;
   }
 }
